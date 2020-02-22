@@ -47,7 +47,6 @@
             this.aic_error.Name = "aic_error";
             this.aic_error.Size = new System.Drawing.Size(166, 21);
             this.aic_error.TabIndex = 0;
-            this.aic_error.Text = "8248124801248120";
             // 
             // analisys_button
             // 

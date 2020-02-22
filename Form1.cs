@@ -69,6 +69,7 @@ namespace AIC_ERROR_Analysis
             {
                 string tempLine = strLine[i];
                 string[] str = new string[3];
+                bool isValidLine = true;
                 for (int j = 0; j < 3; j++)
                 {
                     if (j == 2)
@@ -84,7 +85,16 @@ namespace AIC_ERROR_Analysis
                         return;
                     }
                     str[j] = tempLine.Substring(0, corIndex);
+                    if (j == 0 && !System.Text.RegularExpressions.Regex.IsMatch(str[j], @"^\d+$"))
+                    {
+                        isValidLine = false;
+                        break;
+                    }
                     tempLine = tempLine.Substring(corIndex + 1);
+                }
+                if (!isValidLine)
+                {
+                    continue;
                 }
                 try
                 {
@@ -92,7 +102,7 @@ namespace AIC_ERROR_Analysis
                 }
                 catch (Exception err)
                 {
-                    MessageBox.Show("AIC ERROR Database was damaged!\n" + err.Message);
+                    MessageBox.Show("AIC ERROR Database maybe damaged: " + err.Message);
                     res.Text = "AIC ERROR Database Parse failed!";
                     return;
                 }
@@ -134,12 +144,12 @@ namespace AIC_ERROR_Analysis
             {
                 if (i > errDict.Count())
                 {
-                    res.Text = "Can not recognize the error code!";
+                    res.Text = "Can not recognize the error code, or AIC Error database is not valid!";
                     return;
                 }
                 errTips += i.ToString() + ": " + errDict[i] + "\r\n\r\n";
             }
-            res.Text = "AIC Error Decode Result:" + "\r\n\r\n" + errTips;
+            res.Text = "Default csv file path: " + databasePath + "\r\nAIC Error Decode Result:" + "\r\n\r\n" + errTips;
         }
     }
 }

@@ -19,8 +19,16 @@ namespace AIC_ERROR_Analysis
         string databasePath = Application.StartupPath + @"\aic_error.csv";  //文件路径
 
 
-        bool isValidHex(string hex)
+        bool isValidHex(ref string hex)
         {
+            if (hex.Length > 2)
+            {
+                if (hex[0] == '0' && (hex[1] == 'x' || hex[1] == 'X'))
+                {
+                  hex = hex.Substring(2);
+                }
+
+            }
             if (hex.Length > 16 || hex.Length < 1)
             {
                 return false;
@@ -109,7 +117,7 @@ namespace AIC_ERROR_Analysis
             }
 
             string aicErrorCode = aic_error.Text.Trim();
-            if (!isValidHex(aicErrorCode))
+            if (!isValidHex(ref aicErrorCode))
             {
                 res.Text = "Invalid AIC Error Code!";
                 return;

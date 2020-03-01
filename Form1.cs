@@ -159,5 +159,19 @@ namespace AIC_ERROR_Analysis
             }
             res.Text = "Default csv file path: " + databasePath + "\r\nAIC Error Decode Result:" + "\r\n\r\n" + errTips;
         }
+
+        private void convert_button_Click(object sender, EventArgs e)
+        {
+            string hexStr = hex_txt.Text.Trim();
+            if (!isValidHex(ref hexStr) || hexStr.Length % 4 != 0)
+            {
+                fp16_res.Text = "Invalid hex!";
+                return;
+            }
+
+            UInt64 hex = UInt64.Parse(hexStr, System.Globalization.NumberStyles.HexNumber);
+            SystemHalf.Half half = new SystemHalf.Half(hex);
+            fp16_res.Text = half.ToString();
+        }
     }
 }

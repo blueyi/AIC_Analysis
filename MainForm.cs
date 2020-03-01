@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AIC_ERROR_Analysis
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
@@ -21,7 +21,7 @@ namespace AIC_ERROR_Analysis
 
         bool isValidHex(ref string hex, int minLen = 1, int maxLen = 65504)
         {
-            hex = System.Text.RegularExpressions.Regex.Replace(hex, "0x", "");
+            hex = System.Text.RegularExpressions.Regex.Replace(hex.ToLower(), "0x", "");
             if (hex.Length > maxLen || hex.Length < minLen)
             {
                 return false;
@@ -158,7 +158,7 @@ namespace AIC_ERROR_Analysis
             string hexStr = hex_txt.Text.Trim();
             if (!isValidHex(ref hexStr) || hexStr.Length % 4 != 0)
             {
-                fp16_res.Text = "Invalid hex!";
+                convert_res.Text = "Invalid hex!";
                 return;
             }
 
@@ -172,7 +172,47 @@ namespace AIC_ERROR_Analysis
                 halfStr += half.ToString() + "\r\n";
             }
 
-            fp16_res.Text = halfStr;
+            convert_res.Text = halfStr;
+        }
+
+        private void tofp32_button_Click(object sender, EventArgs e)
+        {
+            string hexStr = hex_txt.Text.Trim();
+            if (!isValidHex(ref hexStr) || hexStr.Length % 8 != 0)
+            {
+                convert_res.Text = "Invalid hex!";
+                return;
+            }
+
+            string fp32Str = "";
+            for (int i = 0; i < hexStr.Length; i += 8)
+            {
+                string tmpStr = hexStr.Substring(i, 8);
+                UInt32 hex = UInt32.Parse(tmpStr, System.Globalization.NumberStyles.HexNumber);
+                byte[] bytes = BitConverter.GetBytes(hex);
+                if (BitConverter.IsLittleEndian)
+                {
+                    bytes = bytes.Reverse().ToArray();
+                }
+                float myFloat = BitConverter.ToSingle(bytes, 0);
+                fp32Str += myFloat.ToString() + "\r\n";
+            }
+
+            convert_res.Text = fp32Str;
+        }
+
+        private void UpperBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (UpperBox.Checked)
+            {
+                hex_txt.CharacterCasing = CharacterCasing.Upper;
+                aic_error.CharacterCasing = CharacterCasing.Upper;
+            }
+            else
+            {
+                hex_txt.CharacterCasing = CharacterCasing.Lower;
+                aic_error.CharacterCasing = CharacterCasing.Lower;
+            }
         }
     }
 }

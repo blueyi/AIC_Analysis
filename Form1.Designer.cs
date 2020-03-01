@@ -41,21 +41,24 @@
             this.convert_button = new System.Windows.Forms.Button();
             this.hex_txt = new System.Windows.Forms.TextBox();
             this.fp16_res = new System.Windows.Forms.TextBox();
+            this.tip1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // aic_error
             // 
             this.aic_error.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.aic_error.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.aic_error.Location = new System.Drawing.Point(130, 13);
+            this.aic_error.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
+            this.aic_error.Location = new System.Drawing.Point(112, 14);
             this.aic_error.Name = "aic_error";
-            this.aic_error.Size = new System.Drawing.Size(166, 21);
+            this.aic_error.Size = new System.Drawing.Size(184, 21);
             this.aic_error.TabIndex = 0;
+            this.aic_error.Text = "0x800000";
             // 
             // analisys_button
             // 
             this.analisys_button.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.analisys_button.Location = new System.Drawing.Point(302, 12);
+            this.analisys_button.Location = new System.Drawing.Point(302, 13);
             this.analisys_button.Name = "analisys_button";
             this.analisys_button.Size = new System.Drawing.Size(75, 23);
             this.analisys_button.TabIndex = 1;
@@ -67,11 +70,12 @@
             // 
             this.aic_error_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.aic_error_label.AutoSize = true;
-            this.aic_error_label.Location = new System.Drawing.Point(16, 17);
+            this.aic_error_label.BackColor = System.Drawing.Color.Transparent;
+            this.aic_error_label.Location = new System.Drawing.Point(16, 18);
             this.aic_error_label.Name = "aic_error_label";
-            this.aic_error_label.Size = new System.Drawing.Size(113, 12);
+            this.aic_error_label.Size = new System.Drawing.Size(101, 12);
             this.aic_error_label.TabIndex = 2;
-            this.aic_error_label.Text = "AIC ERROR Code: 0X";
+            this.aic_error_label.Text = "AIC ERROR Code：";
             // 
             // res
             // 
@@ -150,7 +154,7 @@
             // 
             this.hex_lable.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.hex_lable.AutoSize = true;
-            this.hex_lable.Location = new System.Drawing.Point(391, 21);
+            this.hex_lable.Location = new System.Drawing.Point(391, 18);
             this.hex_lable.Name = "hex_lable";
             this.hex_lable.Size = new System.Drawing.Size(35, 12);
             this.hex_lable.TabIndex = 9;
@@ -159,7 +163,7 @@
             // convert_button
             // 
             this.convert_button.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.convert_button.Location = new System.Drawing.Point(620, 18);
+            this.convert_button.Location = new System.Drawing.Point(620, 13);
             this.convert_button.Name = "convert_button";
             this.convert_button.Size = new System.Drawing.Size(75, 23);
             this.convert_button.TabIndex = 8;
@@ -170,24 +174,48 @@
             // hex_txt
             // 
             this.hex_txt.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.hex_txt.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.hex_txt.Location = new System.Drawing.Point(428, 18);
+            this.hex_txt.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
+            this.hex_txt.Location = new System.Drawing.Point(421, 14);
             this.hex_txt.Name = "hex_txt";
             this.hex_txt.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.hex_txt.Size = new System.Drawing.Size(177, 21);
+            this.hex_txt.Size = new System.Drawing.Size(184, 21);
             this.hex_txt.TabIndex = 7;
-            this.hex_txt.Text = "0X0400";
+            this.hex_txt.Text = "0x04000001";
             // 
             // fp16_res
             // 
             this.fp16_res.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.fp16_res.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.fp16_res.Location = new System.Drawing.Point(428, 53);
+            this.fp16_res.Location = new System.Drawing.Point(428, 59);
             this.fp16_res.Multiline = true;
             this.fp16_res.Name = "fp16_res";
             this.fp16_res.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.fp16_res.Size = new System.Drawing.Size(263, 87);
             this.fp16_res.TabIndex = 10;
+            // 
+            // tip1
+            // 
+            this.tip1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tip1.AutoSize = true;
+            this.tip1.BackColor = System.Drawing.Color.Transparent;
+            this.tip1.Font = new System.Drawing.Font("宋体", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tip1.Location = new System.Drawing.Point(110, 37);
+            this.tip1.Name = "tip1";
+            this.tip1.Size = new System.Drawing.Size(110, 10);
+            this.tip1.TabIndex = 2;
+            this.tip1.Text = "Support: 0x0010, 0010";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("宋体", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(391, 41);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(275, 10);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Support: 0x0400, 0x04000x0001, 04000001, and more fp16";
             // 
             // Form1
             // 
@@ -196,7 +224,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(703, 414);
             this.Controls.Add(this.fp16_res);
-            this.Controls.Add(this.hex_lable);
             this.Controls.Add(this.convert_button);
             this.Controls.Add(this.hex_txt);
             this.Controls.Add(this.powerd);
@@ -205,9 +232,12 @@
             this.Controls.Add(this.res_bin2);
             this.Controls.Add(this.res_bin1);
             this.Controls.Add(this.res);
-            this.Controls.Add(this.aic_error_label);
             this.Controls.Add(this.analisys_button);
             this.Controls.Add(this.aic_error);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.tip1);
+            this.Controls.Add(this.aic_error_label);
+            this.Controls.Add(this.hex_lable);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.Text = "AIC ERROR Analysis";
@@ -231,6 +261,8 @@
         private System.Windows.Forms.Button convert_button;
         private System.Windows.Forms.TextBox hex_txt;
         private System.Windows.Forms.TextBox fp16_res;
+        private System.Windows.Forms.Label tip1;
+        private System.Windows.Forms.Label label3;
     }
 }
 

@@ -19,17 +19,10 @@ namespace AIC_ERROR_Analysis
         string databasePath = Application.StartupPath + @"\aic_error.csv";  //文件路径
 
 
-        bool isValidHex(ref string hex)
+        bool isValidHex(ref string hex, int minLen = 1, int maxLen = 65504)
         {
-            if (hex.Length > 2)
-            {
-                if (hex[0] == '0' && (hex[1] == 'x' || hex[1] == 'X'))
-                {
-                  hex = hex.Substring(2);
-                }
-
-            }
-            if (hex.Length > 16 || hex.Length < 1)
+            hex = System.Text.RegularExpressions.Regex.Replace(hex, "0x", "");
+            if (hex.Length > maxLen || hex.Length < minLen)
             {
                 return false;
             }
@@ -117,7 +110,7 @@ namespace AIC_ERROR_Analysis
             }
 
             string aicErrorCode = aic_error.Text.Trim();
-            if (!isValidHex(ref aicErrorCode))
+            if (!isValidHex(ref aicErrorCode, 1, 16))
             {
                 res.Text = "Invalid AIC Error Code!";
                 return;
@@ -157,7 +150,7 @@ namespace AIC_ERROR_Analysis
                 }
                 errTips += i.ToString() + ": " + errDict[i] + "\r\n\r\n";
             }
-            res.Text = "Default csv file path: " + databasePath + "\r\nAIC Error Decode Result:" + "\r\n\r\n" + errTips;
+            res.Text = "Default csv name is aic_error.csv, file path: " + databasePath + "\r\nAIC Error Decode Result:" + "\r\n\r\n" + errTips;
         }
 
         private void convert_button_Click(object sender, EventArgs e)
@@ -169,9 +162,17 @@ namespace AIC_ERROR_Analysis
                 return;
             }
 
-            UInt64 hex = UInt64.Parse(hexStr, System.Globalization.NumberStyles.HexNumber);
-            SystemHalf.Half half = new SystemHalf.Half(hex);
-            fp16_res.Text = half.ToString();
+            string halfStr = "";
+            for (int i = 0; i < hexStr.Length; i += 4)
+            {
+                string tmpStr = hexStr.Substring(i, 4);
+                UInt16 hex = UInt16.Parse(tmpStr, System.Globalization.NumberStyles.HexNumber);
+                byte[] halfBytes = BitConverter.GetBytes(hex);
+                SystemHalf.Half half = SystemHalf.Half.ToHalf(hex);
+                halfStr += half.ToString() + "\r\n";
+            }
+
+            fp16_res.Text = halfStr;
         }
     }
 }
